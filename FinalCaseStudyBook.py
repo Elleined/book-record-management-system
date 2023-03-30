@@ -6,6 +6,15 @@ connection = sqlite3.connect('BookDB.db')
 query = connection.cursor()
 print("Connected Successfully! BookDB is now active!")
 
+with connection:
+    query.execute("""CREATE TABLE BOOK_DETAILS (
+                        BOOK_ID INTEGER PRIMARY KEY,
+                        BOOK_TITLE VARCHAR(20),
+                        BOOK_GENRE VARCHAR(20),
+                        BOOK_PRICE FLOAT(20)
+                        )""")
+    alert.showinfo("CREATE TABLE", "Table Created!")
+
 def hide_button():
     insert_book_button.place_forget()
     delete_book_button.place_forget()
@@ -66,16 +75,6 @@ def gui_closing():
     connection.close()
     print("Connection to BookDB Closed!")
     gui.destroy()
-
-def create_book_table():
-    with connection:
-        query.execute("""CREATE TABLE BOOK_DETAILS (
-                            BOOK_ID INTEGER PRIMARY KEY,
-                            BOOK_TITLE VARCHAR(20),
-                            BOOK_GENRE VARCHAR(20),
-                            BOOK_PRICE FLOAT(20)
-                            )""")
-        alert.showinfo("CREATE TABLE", "Table Created!")
 
 def read_book_data():
     query.execute("SELECT * FROM BOOK_DETAILS")
