@@ -7,7 +7,7 @@ query = connection.cursor()
 print("Connected Successfully! BookDB is now active!")
 
 with connection:
-    query.execute("""CREATE TABLE BOOK_DETAILS (
+    query.execute("""CREATE TABLE IF NOT EXISTS BOOK_DETAILS (
                         BOOK_ID INTEGER PRIMARY KEY,
                         BOOK_TITLE VARCHAR(20),
                         BOOK_GENRE VARCHAR(20),
